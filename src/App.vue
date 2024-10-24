@@ -1,7 +1,11 @@
 <script setup lang="ts">
 
+import Navigation from '@/components/Shared/Navigation/Navigation.vue'
 </script>
 
 <template>
-  <RouterView />
+  <div>
+    <Navigation/>
+    <RouterView />
+  </div>
 </template>

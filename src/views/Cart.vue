@@ -1,8 +1,11 @@
 <script setup lang="ts">
+
 </script>
 
 <template>
-  <div>
-    products list
-  </div>
+
 </template>
+
+<style scoped>
+
+</style>
