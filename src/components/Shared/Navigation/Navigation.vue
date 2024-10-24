@@ -72,12 +72,15 @@ import { computed } from 'vue'
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
 import { ShoppingBagIcon, Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
 import { useRouter, useRoute } from 'vue-router'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const router = useRouter()
 const route = useRoute()
 
 const navigation = computed(() => [
-  { name: 'Products', href: '/', current: route.path === '/' }
+  { name: t('Products'), href: '/', current: route.path === '/' }
 ])
 
 const classNames = (...classes) => classes.filter(Boolean).join(' ')
