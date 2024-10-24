@@ -2,7 +2,7 @@
 </script>
 
 <template>
-  <div class="text-3xl font-semibold">
-    Hello world!
+  <div class="text-3xl text-red-600">
+    hello world
   </div>
 </template>
