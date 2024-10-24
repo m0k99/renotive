@@ -3,7 +3,5 @@
 </script>
 
 <template>
-  <h1 class="text-5xl font-bold underline text-red-600">
-    Hello world!
-  </h1>
+  <RouterView />
 </template>
