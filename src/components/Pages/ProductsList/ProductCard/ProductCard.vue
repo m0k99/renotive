@@ -14,7 +14,7 @@ const cartStore = useCartStore()
 
 const cartProducts = toRef(cartStore, 'cartProducts')
 const computePrice = (p: IProductDTO) =>
-  parseFloat((p.price - (p.price * (p.discountPercentage / 100))).toFixed(2));
+  parseFloat((p.price - (p.price * (p.discountPercentage / 100))).toFixed(2))
 
 const addToCart = () => cartStore.addToCart(product.value)
 const removeFromCart = () => cartStore.removeFromCart(product.value)
@@ -24,8 +24,8 @@ const productInCart = computed(() => cartProducts.value.find(i => i.id === produ
 const totalPrice = computed(() => {
   return productInCart.value
     ? (productInCart.value.count * computePrice(product.value)).toFixed(2)
-    : '0.00';
-});
+    : '0.00'
+})
 </script>
 
 <template>
@@ -49,13 +49,13 @@ const totalPrice = computed(() => {
       </div>
       <div class="flex items-center justify-between">
         <div class="flex items-center justify-start gap-2">
-        <span
-          :class="{
-            'line-through text-red-600': product.discountPercentage > 0
-          }"
-        >
-          ${{ product.price }}
-        </span>
+          <span
+            :class="{
+              'line-through text-red-600': product.discountPercentage > 0
+            }"
+          >
+            ${{ product.price }}
+          </span>
           <span v-if="product.discountPercentage > 0">${{ computePrice(product) }}</span>
         </div>
         <Rate :value="product.rating" />
@@ -69,7 +69,8 @@ const totalPrice = computed(() => {
           {{ $t('Add To Cart') }}
         </button>
         <div v-else class="grid grid-cols-2 md:grid-cols-2 pb-0.5">
-          <div class="md:col-span-1 col-span-1 flex items-center justify-start space-x-1 text-lg font-semibold text-gray-800">
+          <div
+            class="md:col-span-1 col-span-1 flex items-center justify-start space-x-1 text-lg font-semibold text-gray-800">
             <span>{{ $t('Total:') }}</span>
             <span class="text-blue-600">${{ totalPrice }}</span>
           </div>
@@ -90,7 +91,10 @@ const totalPrice = computed(() => {
                 'opacity-50 cursor-not-allowed': product.stock === productInCart.count
               }"
             >
-              <PlusIcon class="h-4 w-4" />
+              <PlusIcon v-if="product.stock > productInCart.count" class="h-4 w-4" />
+              <span v-else class="text-xs h-4 block">
+                MAX
+              </span>
             </button>
           </div>
         </div>
