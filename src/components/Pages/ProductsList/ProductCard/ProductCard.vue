@@ -13,12 +13,19 @@ const product = toRef(props, 'value')
 const cartStore = useCartStore()
 
 const cartProducts = toRef(cartStore, 'cartProducts')
-const computePrice = (p: IProductDTO) => (p.price - (p.price * (p.discountPercentage / 100))).toFixed(2)
+const computePrice = (p: IProductDTO) =>
+  parseFloat((p.price - (p.price * (p.discountPercentage / 100))).toFixed(2));
 
 const addToCart = () => cartStore.addToCart(product.value)
 const removeFromCart = () => cartStore.removeFromCart(product.value)
 
 const productInCart = computed(() => cartProducts.value.find(i => i.id === product.value.id))
+
+const totalPrice = computed(() => {
+  return productInCart.value
+    ? (productInCart.value.count * computePrice(product.value)).toFixed(2)
+    : '0.00';
+});
 </script>
 
 <template>
@@ -53,7 +60,7 @@ const productInCart = computed(() => cartProducts.value.find(i => i.id === produ
         </span>
           <span v-if="product.discountPercentage > 0">${{ computePrice(product) }}</span>
         </div>
-        <Rate :value="product.rating"/>
+        <Rate :value="product.rating" />
       </div>
       <div>
         <button
@@ -63,18 +70,31 @@ const productInCart = computed(() => cartProducts.value.find(i => i.id === produ
         >
           {{ $t('Add To Cart') }}
         </button>
-        <div v-else class="flex items-center justify-between pb-0.5">
-          <button
-            @click="removeFromCart"
-            class="border p-2 rounded-md cursor-pointer border-red-600 text-red-600"
-          >
-            <MinusIcon v-if="productInCart.count>1" class="h-4 w-4" />
-            <TrashIcon v-else class="h-4 w-4"></TrashIcon>
-          </Button>
-          <span class="text-lg font-semibold">{{ productInCart.count }}</span>
-          <button @click="addToCart" class="border p-2 rounded-md cursor-pointer">
-            <PlusIcon class="h-4 w-4" />
-          </Button>
+        <div v-else class="grid grid-cols-2 md:grid-cols-2 pb-0.5">
+          <div class="md:col-span-1 col-span-1 flex items-center justify-start space-x-1 text-lg font-semibold text-gray-800">
+            <span>{{ $t('Total:') }}</span>
+            <span class="text-blue-600">${{ totalPrice }}</span>
+          </div>
+          <div class="flex items-center justify-between ">
+            <button
+              @click="removeFromCart"
+              class="border p-2 rounded-md cursor-pointer border-red-600 text-red-600"
+            >
+              <MinusIcon v-if="productInCart.count>1" class="h-4 w-4" />
+              <TrashIcon v-else class="h-4 w-4"></TrashIcon>
+            </Button>
+            <span class="text-lg font-semibold">{{ productInCart.count }}</span>
+            <button
+              @click="addToCart"
+              :disabled="product.stock === productInCart.count"
+              :class="{
+                'border border-gray-600 p-2 rounded-md cursor-pointer': true,
+                'opacity-50 cursor-not-allowed': product.stock === productInCart.count
+              }"
+            >
+              <PlusIcon class="h-4 w-4" />
+            </button>
+          </div>
         </div>
       </div>
     </div>

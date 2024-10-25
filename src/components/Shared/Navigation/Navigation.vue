@@ -1,5 +1,5 @@
 <template>
-  <Disclosure as="nav" class="bg-gray-100 shadow">
+  <Disclosure as="nav" class="shadow sticky top-0 left-0 z-50 backdrop-blur-md bg-gray-100/50 ">
     <template v-slot="{ open }">
       <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div class="relative flex h-16 justify-between">
