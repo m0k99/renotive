@@ -1,4 +1,12 @@
 <script setup lang="ts">
+import { useCartStore } from '@/stores/useCartStore'
+import { toRef } from 'vue'
+
+const cartStore = useCartStore()
+
+const subtotal = toRef(cartStore, 'subtotal')
+const totalDiscountAmount = toRef(cartStore, 'totalDiscountAmount')
+const totalCostAfterDiscounts = toRef(cartStore, 'totalCostAfterDiscounts')
 
 </script>
 
@@ -11,19 +19,19 @@
       <div class="flex items-center justify-between gap-3 pb-4">
         <span class="text-gray-700">{{ $t('Total Before Discount') }}</span>
         <span class="text-gray-900">
-          $99
+          ${{ subtotal }}
         </span>
       </div>
       <div class="flex items-center justify-between gap-3 py-4">
         <span class="text-gray-700">{{ $t('Savings') }}</span>
         <span class="text-gray-900">
-          $99
+          ${{ totalDiscountAmount }}
         </span>
       </div>
       <div class="flex items-center justify-between gap-3 pt-4 text-base font-medium">
         <span class="text-gray-900">{{ $t('Total After Savings') }}</span>
         <span class="text-gray-900">
-          $99
+          ${{totalCostAfterDiscounts}}
         </span>
       </div>
     </div>

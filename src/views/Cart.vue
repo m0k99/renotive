@@ -14,7 +14,7 @@ import OrderSummary from '@/components/Pages/Cart/OrderSummary/OrderSummary.vue'
           </div>
         </div>
         <div class="col-span-5">
-          <OrderSummary/>
+          <OrderSummary />
         </div>
       </div>
     </div>
