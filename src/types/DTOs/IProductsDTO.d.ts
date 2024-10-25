@@ -8,7 +8,7 @@ export interface Review {
   reviewerName: string;
   rating: number;
   date: string;
-  reviewerEmail:string;
+  reviewerEmail: string;
   comment: string;
 }
 
@@ -42,6 +42,11 @@ export interface IProductDTO {
   meta: Meta;
   images: string[];
   thumbnail: string;
+}
+
+export interface IProductResponse {
+  products: IProductDTO[];
+  status: number;
 }
 
 

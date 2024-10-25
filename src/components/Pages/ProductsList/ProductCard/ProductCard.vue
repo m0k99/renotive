@@ -45,7 +45,7 @@ const computePrice = (p: IProductDTO) => (p.price - (p.price * (p.discountPercen
         <span v-if="product.discountPercentage > 0">${{ computePrice(product) }}</span>
       </div>
       <div>
-        <button v-if="false" class="bg-gray-100 text-gray-900 rounded-md block w-full py-2 text-sm font-medium">
+        <button v-if="true" class="bg-gray-100 text-gray-900 rounded-md block w-full py-2 text-sm font-medium">
           {{ $t('Add To Cart') }}
         </button>
         <div v-else class="flex items-center justify-between">
