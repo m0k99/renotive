@@ -1,9 +1,12 @@
+
+// Interface representing the dimensions of a product
 export interface Dimensions {
   width: number;
   height: number;
   depth: number;
 }
 
+// Interface representing a product review
 export interface Review {
   reviewerName: string;
   rating: number;
@@ -12,6 +15,7 @@ export interface Review {
   comment: string;
 }
 
+// Interface representing metadata associated with a product
 export interface Meta {
   createdAt: string;
   updatedAt: string;
@@ -19,6 +23,7 @@ export interface Meta {
   qrCode: string;
 }
 
+// Interface representing a product data transfer object (DTO)
 export interface IProductDTO {
   id: number;
   title: string;
@@ -43,10 +48,4 @@ export interface IProductDTO {
   images: string[];
   thumbnail: string;
 }
-
-export interface IProductResponse {
-  products: IProductDTO[];
-  status: number;
-}
-
 
