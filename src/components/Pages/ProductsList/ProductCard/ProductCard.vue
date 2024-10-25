@@ -1,15 +1,23 @@
 <script setup lang="ts">
 import type { IProductCard } from '@/components/Pages/ProductsList/ProductCard/ProductCard.d'
 import { MinusIcon, PlusIcon, TrashIcon } from '@heroicons/vue/24/outline'
-import { toRef } from 'vue'
+import { computed, toRef } from 'vue'
 import type { IProductDTO } from '@/types/DTOs/IProductsDTO'
+import { useCartStore } from '@/stores/useCartStore'
 
 const props = defineProps<IProductCard>()
 
 const product = toRef(props, 'value')
 
+const cartStore = useCartStore()
+
+const cartProducts = toRef(cartStore, 'cartProducts')
 const computePrice = (p: IProductDTO) => (p.price - (p.price * (p.discountPercentage / 100))).toFixed(2)
 
+const addToCart = () => cartStore.addToCart(product.value)
+const removeFromCart = () => cartStore.removeFromCart(product.value)
+
+const productInCart = computed(() => cartProducts.value.find(i => i.id === product.value.id))
 </script>
 
 <template>
@@ -27,7 +35,6 @@ const computePrice = (p: IProductDTO) => (p.price - (p.price * (p.discountPercen
         <div>
           <h3 class="text-sm text-gray-800">
             <span>
-              <span class="absolute inset-0" />
               {{ product.title }}
             </span>
           </h3>
@@ -45,16 +52,23 @@ const computePrice = (p: IProductDTO) => (p.price - (p.price * (p.discountPercen
         <span v-if="product.discountPercentage > 0">${{ computePrice(product) }}</span>
       </div>
       <div>
-        <button v-if="true" class="bg-gray-100 text-gray-900 rounded-md block w-full py-2 text-sm font-medium">
+        <button
+          @click="addToCart"
+          v-if="!productInCart"
+          class="bg-gray-100 text-gray-900 rounded-md block w-full py-2 text-sm font-medium cursor-pointer"
+        >
           {{ $t('Add To Cart') }}
         </button>
-        <div v-else class="flex items-center justify-between">
-          <button class="border p-2 rounded-md">
-            <MinusIcon class="h-4 w-4" />
-            <TrashIcon v-if="false" class="h-4 w-4"></TrashIcon>
+        <div v-else class="flex items-center justify-between pb-0.5">
+          <button
+            @click="removeFromCart"
+            class="border p-2 rounded-md cursor-pointer border-red-600 text-red-600"
+          >
+            <MinusIcon v-if="productInCart.count>1" class="h-4 w-4" />
+            <TrashIcon v-else class="h-4 w-4 "></TrashIcon>
           </Button>
-          <span class="text-lg font-semibold">5</span>
-          <button class="border p-2 rounded-md">
+          <span class="text-lg font-semibold">{{ productInCart.count }}</span>
+          <button @click="addToCart" class="border p-2 rounded-md cursor-pointer">
             <PlusIcon class="h-4 w-4" />
           </Button>
         </div>
