@@ -12,7 +12,7 @@ const totalCostAfterDiscounts = toRef(cartStore, 'totalCostAfterDiscounts')
 
 <template>
   <div>
-    <div class="bg-gray-50 rounded-md p-8 text-sm space-y-6">
+    <div class="bg-gray-50 rounded-md p-8 text-sm space-y-6 w-full">
       <h2 class="text-lg font-medium">
         {{ $t('Order summary') }}
       </h2>

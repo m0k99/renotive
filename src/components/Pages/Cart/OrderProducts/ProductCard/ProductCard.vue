@@ -16,15 +16,15 @@ const removeFromCart = () => cartStore.removeFromCart(product.value)
 
 <template>
   <div class="py-10 border-b">
-    <div class="flex justify-start gap-3 flex-col sm:flex-row">
-      <div class="aspect-square max-w-48 w-full overflow-hidden bg-gray-200 h-48 rounded-md">
+    <div class="flex justify-start gap-3 flex-col lg:flex-row">
+      <div class="aspect-square lg:max-w-48 w-full overflow-hidden bg-gray-200 lg:h-48 rounded-md">
         <img
           :src="product.thumbnail"
           :alt="product.title"
           class="object-cover object-center h-full w-full"
         />
       </div>
-      <div class="flex-1 flex flex-col">
+      <div class="flex-1 flex flex-col gap-4">
         <div class="flex flex-1 justify-between">
           <div class="flex justify-between flex-1 w-full">
             <div>
@@ -43,7 +43,7 @@ const removeFromCart = () => cartStore.removeFromCart(product.value)
             </div>
           </div>
         </div>
-        <div class="w-full flex items-center justify-end">
+        <div class="w-full flex items-center justify-center sm:justify-end">
           <button
             @click="removeFromCart"
             class="border p-2 rounded-md cursor-pointer border-red-600 text-red-600"
