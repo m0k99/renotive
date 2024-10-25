@@ -5,8 +5,11 @@ import { ShoppingBagIcon, Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline
 import LangSwitcher from '@/components/Shared/LangSwitcher/LangSwitcher.vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
+import { VITE_HEADER_BG } from '@/environment'
 
 const { t } = useI18n()
+import Color from 'color'
+
 
 const router = useRouter()
 const route = useRoute()
@@ -20,10 +23,23 @@ const classNames = (...classes: string[]) => classes.filter(Boolean).join(' ')
 const navigateTo = (path: string) => {
   router.push(path)
 }
+
+const headerBackground = computed(() => {
+  // Convert hex to rgba with 0.3 opacity
+  const color = Color(VITE_HEADER_BG)
+
+  // Convert to RGB with opacity
+  return color.alpha(0.3).rgb().string()
+
+})
 </script>
 
 <template>
-  <Disclosure as="nav" class="shadow sticky top-0 left-0 z-50 backdrop-blur-md bg-gray-100/50 ">
+  <Disclosure
+    as="nav"
+    class="shadow sticky top-0 left-0 z-50 backdrop-blur-md"
+    :style="{background:headerBackground}"
+  >
     <template v-slot="{ open }">
       <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div class="relative flex h-16 justify-between">
