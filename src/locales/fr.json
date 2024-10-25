@@ -1,13 +1,13 @@
 {
-  "Products": "Products",
-  "Add To Cart": "Add To Cart",
-  "Perfect Products": "Perfect Products",
-  "Total:": "Total:",
-  "Checkout": "Checkout",
-  "Total Before Discount": "Total Before Discount",
-  "Savings": "Savings",
-  "Total After Savings": "Total After Savings",
-  "Shopping Cart": "Shopping Cart",
-  "Order summary": "Order summary",
+  "Products": "Produits",
+  "Add To Cart": "Ajouter au Panier",
+  "Perfect Products": "Produits Parfaits",
+  "Total:": "Total :",
+  "Checkout": "Passer à la Caisse",
+  "Total Before Discount": "Total Avant Remise",
+  "Savings": "Économies",
+  "Total After Savings": "Total Après Économies",
+  "Shopping Cart": "Panier",
+  "Order summary": "Résumé de la Commande",
   "MAX": "MAX"
 }
