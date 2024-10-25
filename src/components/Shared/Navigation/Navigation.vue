@@ -41,6 +41,7 @@
               <span class="sr-only">Cart</span>
               <ShoppingBagIcon class="h-6 w-6" />
             </button>
+            <LangSwitcher></LangSwitcher>
           </div>
         </div>
       </div>
@@ -67,10 +68,11 @@
   </Disclosure>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed } from 'vue'
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
 import { ShoppingBagIcon, Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
+import LangSwitcher from '@/components/Shared/LangSwitcher/LangSwitcher.vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 
@@ -83,9 +85,9 @@ const navigation = computed(() => [
   { name: t('Products'), href: '/', current: route.path === '/' }
 ])
 
-const classNames = (...classes) => classes.filter(Boolean).join(' ')
+const classNames = (...classes: string[]) => classes.filter(Boolean).join(' ')
 
-const navigateTo = (path) => {
+const navigateTo = (path: string) => {
   router.push(path)
 }
 </script>
