@@ -4,6 +4,7 @@ import { MinusIcon, PlusIcon, TrashIcon } from '@heroicons/vue/24/outline'
 import { computed, toRef } from 'vue'
 import type { IProductDTO } from '@/types/DTOs/IProductsDTO'
 import { useCartStore } from '@/stores/useCartStore'
+import Rate from '@/components/Core/Rate/Rate.vue'
 
 const props = defineProps<IProductCard>()
 
@@ -41,7 +42,8 @@ const productInCart = computed(() => cartProducts.value.find(i => i.id === produ
           <p class="mt-1 text-sm text-gray-500 line-clamp-2	">{{ product.description }}</p>
         </div>
       </div>
-      <div class="flex items-center justify-start gap-2">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center justify-start gap-2">
         <span
           :class="{
             'line-through text-red-600': product.discountPercentage > 0
@@ -49,7 +51,9 @@ const productInCart = computed(() => cartProducts.value.find(i => i.id === produ
         >
           ${{ product.price }}
         </span>
-        <span v-if="product.discountPercentage > 0">${{ computePrice(product) }}</span>
+          <span v-if="product.discountPercentage > 0">${{ computePrice(product) }}</span>
+        </div>
+        <Rate :value="product.rating"/>
       </div>
       <div>
         <button
@@ -65,7 +69,7 @@ const productInCart = computed(() => cartProducts.value.find(i => i.id === produ
             class="border p-2 rounded-md cursor-pointer border-red-600 text-red-600"
           >
             <MinusIcon v-if="productInCart.count>1" class="h-4 w-4" />
-            <TrashIcon v-else class="h-4 w-4 "></TrashIcon>
+            <TrashIcon v-else class="h-4 w-4"></TrashIcon>
           </Button>
           <span class="text-lg font-semibold">{{ productInCart.count }}</span>
           <button @click="addToCart" class="border p-2 rounded-md cursor-pointer">
