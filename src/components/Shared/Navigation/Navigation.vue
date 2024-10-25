@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, toRef } from 'vue'
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
 import { ShoppingBagIcon, Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
 import LangSwitcher from '@/components/Shared/LangSwitcher/LangSwitcher.vue'
@@ -9,10 +9,14 @@ import { VITE_HEADER_BG } from '@/environment'
 
 const { t } = useI18n()
 import Color from 'color'
-
+import { useCartStore } from '@/stores/useCartStore'
 
 const router = useRouter()
 const route = useRoute()
+
+const cartStore = useCartStore()
+
+const cartProducts = toRef(cartStore, 'cartProducts')
 
 const navigation = computed(() => [
   { name: t('Products'), href: '/', current: route.path === '/' }
@@ -25,11 +29,11 @@ const navigateTo = (path: string) => {
 }
 
 const headerBackground = computed(() => {
-  // Convert hex to rgba with 0.3 opacity
+  // Convert hex to rgba with 0.5 opacity
   const color = Color(VITE_HEADER_BG)
 
   // Convert to RGB with opacity
-  return color.alpha(0.3).rgb().string()
+  return color.alpha(0.5).rgb().string()
 
 })
 </script>
@@ -83,6 +87,9 @@ const headerBackground = computed(() => {
             >
               <span class="sr-only">Cart</span>
               <ShoppingBagIcon class="h-6 w-6" />
+              <span v-if="cartProducts.length" class="absolute inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-indigo-600 border-1 border-white rounded-full top-1 end-5 ">
+                {{ cartProducts.length }}
+              </span>
             </button>
             <LangSwitcher></LangSwitcher>
           </div>
