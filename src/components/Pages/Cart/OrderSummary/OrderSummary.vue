@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useCartStore } from '@/stores/useCartStore'
-import { toRef } from 'vue'
+import { ref, toRef } from 'vue'
+import Confetti from '@/components/Core/Confetti/Confetti.vue'
 
 const cartStore = useCartStore()
 
@@ -8,6 +9,14 @@ const subtotal = toRef(cartStore, 'subtotal')
 const totalDiscountAmount = toRef(cartStore, 'totalDiscountAmount')
 const totalCostAfterDiscounts = toRef(cartStore, 'totalCostAfterDiscounts')
 
+const confettiVisible = ref(false)
+
+const showConfetti = () => {
+  confettiVisible.value = true
+  setTimeout(() => {
+    confettiVisible.value = false
+  }, 3000) // Hide confetti after 3 seconds
+}
 </script>
 
 <template>
@@ -32,13 +41,14 @@ const totalCostAfterDiscounts = toRef(cartStore, 'totalCostAfterDiscounts')
         <div class="flex items-center justify-between gap-3 pt-4 text-base font-medium">
           <span class="text-gray-900">{{ $t('Total After Savings') }}</span>
           <span class="text-gray-900">
-          ${{totalCostAfterDiscounts}}
+          ${{ totalCostAfterDiscounts }}
         </span>
         </div>
       </div>
-      <button class="w-full text-white py-3 bg-indigo-600 rounded-md font-medium">
+      <button @click="showConfetti" class="w-full text-white py-3 bg-indigo-600 rounded-md font-medium">
         {{ $t('Checkout') }}
       </button>
     </div>
+    <Confetti v-if="confettiVisible"/>
   </div>
 </template>
