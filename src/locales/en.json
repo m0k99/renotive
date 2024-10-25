@@ -2,5 +2,9 @@
   "Products": "Products",
   "Add To Cart": "Add To Cart",
   "Find the Perfect Products": "Find the Perfect Products",
-  "Total:": "Total:"
+  "Total:": "Total:",
+  "Checkout": "Checkout",
+  "Total Before Discount": "Total Before Discount",
+  "Savings": "Savings",
+  "Total After Savings": "Total After Savings"
 }
