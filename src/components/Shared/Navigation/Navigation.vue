@@ -1,3 +1,27 @@
+<script setup lang="ts">
+import { computed } from 'vue'
+import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
+import { ShoppingBagIcon, Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
+import LangSwitcher from '@/components/Shared/LangSwitcher/LangSwitcher.vue'
+import { useRouter, useRoute } from 'vue-router'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
+
+const router = useRouter()
+const route = useRoute()
+
+const navigation = computed(() => [
+  { name: t('Products'), href: '/', current: route.path === '/' }
+])
+
+const classNames = (...classes: string[]) => classes.filter(Boolean).join(' ')
+
+const navigateTo = (path: string) => {
+  router.push(path)
+}
+</script>
+
 <template>
   <Disclosure as="nav" class="shadow sticky top-0 left-0 z-50 backdrop-blur-md bg-gray-100/50 ">
     <template v-slot="{ open }">
@@ -34,7 +58,7 @@
           <div class="flex items-stretch pr-2 sm:ml-6 sm:pr-0">
             <button
               type="button"
-              class="p-1 text-gray-600 hover:text-gray-900 border-indigo-500 px-1 pt-1"
+              class="relative p-1 text-gray-600 hover:text-gray-900 border-indigo-500 px-1 pt-1"
               :class="route.path==='/cart'?'border-b-2':''"
               @click="navigateTo('/cart')"
             >
@@ -68,26 +92,4 @@
   </Disclosure>
 </template>
 
-<script setup lang="ts">
-import { computed } from 'vue'
-import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
-import { ShoppingBagIcon, Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
-import LangSwitcher from '@/components/Shared/LangSwitcher/LangSwitcher.vue'
-import { useRouter, useRoute } from 'vue-router'
-import { useI18n } from 'vue-i18n'
 
-const { t } = useI18n()
-
-const router = useRouter()
-const route = useRoute()
-
-const navigation = computed(() => [
-  { name: t('Products'), href: '/', current: route.path === '/' }
-])
-
-const classNames = (...classes: string[]) => classes.filter(Boolean).join(' ')
-
-const navigateTo = (path: string) => {
-  router.push(path)
-}
-</script>
