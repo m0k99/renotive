@@ -95,7 +95,7 @@ const computePrice = (p: IProductDTO) =>
             >
               <PlusIcon v-if="product.stock > product.count" class="h-4 w-4" />
               <span v-else class="text-xs h-4 block">
-                MAX
+                {{ $t('MAX') }}
               </span>
             </button>
           </div>
