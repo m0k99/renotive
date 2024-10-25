@@ -42,9 +42,7 @@ const totalPrice = computed(() => {
       <div class="flex justify-between">
         <div>
           <h3 class="text-sm text-gray-800">
-            <span>
-              {{ product.title }}
-            </span>
+            {{ product.title }}
           </h3>
           <p class="mt-1 text-sm text-gray-500 line-clamp-2	">{{ product.description }}</p>
         </div>

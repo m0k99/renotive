@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import OrderSummary from '@/components/Pages/Cart/OrderSummary/OrderSummary.vue'
+import OrderProducts from '@/components/Pages/Cart/OrderProducts/OrderProducts.vue'
 </script>
 
 <template>
@@ -8,14 +9,8 @@ import OrderSummary from '@/components/Pages/Cart/OrderSummary/OrderSummary.vue'
       <h2 class="text-4xl font-bold tracking-tight text-gray-900">{{ $t('Shopping Cart') }}</h2>
 
       <div class="grid grid-cols-12 gap-16">
-        <div class="col-span-7 border-t">
-          <div class="py-10 border-b">
-            Product
-          </div>
-        </div>
-        <div class="col-span-5">
-          <OrderSummary />
-        </div>
+        <OrderProducts class="col-span-7"/>
+        <OrderSummary class="col-span-5" />
       </div>
     </div>
   </div>
