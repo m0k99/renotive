@@ -10,8 +10,11 @@ import router from './router'
 import enMessages from './locales/en.json'
 import frMessages from './locales/fr.json'
 
+const savedLanguage = localStorage.getItem('language') || 'en';
+
 const i18n = createI18n({
-  locale: 'en',
+  locale: savedLanguage,
+  legacy: false,
   fallbackLocale: 'en',
   messages: {
     en: enMessages,

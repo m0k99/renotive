@@ -60,6 +60,8 @@ const fullLanguageName = computed(() => {
 const setLang = (lang: string, close: () => void) => {
   locale.value = lang
 
+  localStorage.setItem('language', lang);
+
   close()
 }
 </script>
